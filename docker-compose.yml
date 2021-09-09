@@ -3,10 +3,10 @@ version: '3'
 services:
     #nombre del servicio
     flask:
-      build: .
-          #context: cashman
+      build: 
+          context: cashman
           #metodo lanzador
-          #dockerfile: Dockerfile
+          dockerfile: Dockerfile
       #esto lanzara nuestro framework    
       command: ./bootstrap.sh
       container_name: cashman
