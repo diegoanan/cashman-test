@@ -1,0 +1,227 @@
+instalacion de complementos flask
+
+$pip install flask
+
+creacion y modificacion de archivo hello.py ubicado en /Documentos/flaskmongo
+
+$nano hello.py
+
+creacion de dependencias para el ambiente vitual env de flask
+
+$export FLASK_APP=hello.py
+
+ejecucion de flask, la salida sera por el localhost:5000 y se puede dejar de ejecutar con Ctrl+c
+
+$flask run
+
+intalacion de pipenv para la creacion de un ambiente virtual de proyecto
+
+$pip install pipenv
+
+usando pipenv para crear el ambiente con python3
+
+$pipenv --three
+
+intalacion de dependencias dentro del proyecto
+
+$pipenv install flask
+
+creacion de direcotio cashman-flask-project y ubicar el puntero en el mismo
+
+$mkdir cashman-flask-project
+
+creacion del directorio reiz y ubicando el puntero en el mismo
+
+$mkdir cashman && cd cashman
+
+creacion de archivo vacio __init__.py
+
+$touch __init__.py
+
+creacion y modificacion del arvhico index.py
+
+$ nano index.py
+
+ubicacion del puntero en cashman-flask-project
+
+cd ..
+
+creacion de archivo bootstrap.sh
+
+$touch bootstrap.sh
+
+convertir archivo bootstrap en ejecutable
+
+$chmod +x bootstrap.sh
+
+modificacion del archivo bootstrap.sh
+
+$nano bootstrap.sh
+
+ejecucion del archivo bootstrap.sh y su salida sera por la ip publica o localhost con puerto 5000
+
+$./bootstrap.sh
+
+creacion de archivo index.py dentro de /cashman y modificacion de este
+
+$nano ./cashman/index.py
+
+ejecucion del archivo bootstrap.sh y su salida sera por la ip publica o localhost con puerto 5000
+
+$./bootstrap.sh &
+
+consulta por consola del contenido 
+
+$curl http://localhost:5000/incomes
+
+añadir informacion al programa mediante consola
+
+$curl -X POST -H "Content-Type: application/json" -d '{
+  "description": "lottery",
+  "amount": 1000.0
+}' http://localhost:5000/incomes
+
+consulta por consola del contenido 
+
+$curl http://localhost:5000/incomes
+
+creacion de directorio model en /cashman
+
+$mkdir -p cashman/model
+
+creacion de archivo __init__.py dentro de model
+
+$touch cashman/model/__init__.py
+
+creaciony modificacion de archivo transaction.py dentro de cashman/model, contendra las clases Transaction y TransactionSchema
+
+$nano /cashman/model/transaction.py
+
+intalacion de la dependecia marsmallow dentro del ambiene del proyecto
+
+$pipenv install marshmallow
+
+creacion del archivo y modificacion de income.py dentro de model, contendra las clases Income que recibe Transaction y IncomeSchema que recibira TransactionSchema, este archivo codificara el tipo de transaccion
+
+$nano /cashman/model/income.py
+
+creacion y modificaicion de transaction_type.py dentro de model, este archivo enumerara las transacciones
+
+$nano /cashman/model/transaction_type.py
+
+creacion y modificacion de archivo expense.py dentro de model que codifica la infomacion, igualmente almacenara cualquier tipo de numero como negativo
+
+$nano cashman/model/expense.py
+
+modificacion del archivo index para hacer uso de las clases en los archivos anteriormente creados
+
+$nano cashman/index.py
+
+ejecucion de la aplicacion con las nuevas modificaciones
+*************por error de dependencia se instalo marshmallow con pip fuera del ambiente virtual y esto soluciono el problema**************
+
+$./bootstrap.sh
+
+consulta de gastos desde terminal con:
+
+$curl http://localhost:5000/expenses
+
+adicion de nuevos datos en gastos
+
+$curl -X POST -H "Content-Type: application/json" -d '{
+    "amount": 20,
+    "description": "lottery ticket"
+}' http://localhost:5000/expenses
+
+
+consulta de ingresos con:
+
+$curl http://localhost:5000/incomes
+
+adicion de nuevos datos en ingresos
+
+$curl -X POST -H "Content-Type: application/json" -d '{
+    "amount": 300.0,
+    "description": "loan payment"
+}' http://localhost:5000/incomes
+
+
+
+**instalacion de docker**
+
+creacion y modificacion del archivo Dockerfile
+
+$nano Dockerfile
+
+creacion del contenedor
+
+$docker build -t cashman .
+
+ejecucion del contenedor 
+
+$docker run --name cashman \
+    -d -p 5000:5000 \
+    cashman
+    
+consulta de la salida
+
+$curl http://localhost:5000/incomes/
+
+instalacion de la dependencia flask-cors, python-jose, six, python-dotenv
+
+$pip install flask-cors
+
+instalacion de pymongo
+
+$pip install pymongo
+
+instalacion de mongodb
+
+$sudo apt install -y mongodb
+
+inicializacion del servicio de mongodb
+
+$sudo systemctl start mongod
+
+comprobacion de estado del servicio
+
+$sudo systemctl status mongod
+
+verificacion  del servidor con:
+
+$mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+
+creacion y modificacion de archivo docker-compose.yml
+
+$nano docker-compose.yml
+
+creaciony modificacion de database.py ubicada en cashman/model
+
+$nano cashman/model/database.py
+
+Modificacion del archivo index para incluir la conexion a la DB y alamcenar informacion con sus funciones
+
+#nano cashman/index.py
+
+creacion del archivo docker-compose.yml el cual contendra las variables de entorno y los parametros necesarions para la creacion de los servicios
+
+#nano docker-compose.sh
+
+instalacion de docker-compose
+
+$sudo apt install docker-compose
+
+construccion y ejecucion del contenedor
+en este caso la salida es por la direccion publica de la maquina en el puerto 5000
+
+**para detener el proceso oprimimos 'ctrl+c'**
+
+$docker-compose up
+
+podremos verificar si los contenedores se crearon con 
+
+$docker ps -a
+
+
+
+
